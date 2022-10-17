@@ -1,5 +1,4 @@
 const articles = require("./articles.mongo");
-const comments = require("./comment.mongo");
 
 const findArticles = async (filter) => {
   return articles.findOne(filter);
@@ -12,6 +11,7 @@ const articleIdLatest = async () => {
   }
   return latestArticle.article_id;
 };
+
 const postArticle = async (article) => {
   try {
     await articles.findOneAndUpdate({ article_id: article.id }, article, {
@@ -21,6 +21,7 @@ const postArticle = async (article) => {
     console.log(err);
   }
 };
+
 const existAritcle = async (articleId) => {
   return await findArticles({
     article_id: articleId,
@@ -52,13 +53,13 @@ const updateArticle = async (articleId, article) => {
     article
   );
 };
+
 const deleteArticle = async (articleId) => {
   return await articles.findOneAndDelete({
     article_id: articleId,
   });
 };
 
-const laodArticle = async () => {};
 module.exports = {
   getArticle,
   newPostArticle,

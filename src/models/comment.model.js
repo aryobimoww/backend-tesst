@@ -1,8 +1,10 @@
 const comments = require("./comment.mongo");
 const articles = require("./articles.mongo");
+
 const findComment = async (filter) => {
   return await comments.findOne(filter);
 };
+
 const postComments = async (comment) => {
   try {
     await comments.findOneAndUpdate(
@@ -16,6 +18,7 @@ const postComments = async (comment) => {
     console.error(err);
   }
 };
+
 const existComment = async (commentId) => {
   return await findComment({
     comment_id: commentId,
@@ -59,6 +62,7 @@ const updateComment = async (articleId, commentId, comment) => {
     comment
   );
 };
+
 const deleteComment = async (articleId, commentId) => {
   await comments.findOneAndDelete({
     article_id: articleId,
